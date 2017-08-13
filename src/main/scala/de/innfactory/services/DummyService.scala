@@ -12,18 +12,6 @@ import scala.concurrent.ExecutionContext
 class DummyService()(implicit executionContext: ExecutionContext)  extends Persistence {
   val dummyRepository = new DummyRepository()
 
-  def getAll = {
-    executeOperation {
-      dummyRepository.findAll()
-    }
-  }
-
-  def getOne(id : Long) = {
-    executeOperation {
-      dummyRepository.find(Some(id), None)
-    }
-  }
-
   def findGraphQL(args : Args) = {
     executeOperation {
       dummyRepository.find(args.argOpt("id"), args.argOpt("dummy"))
@@ -44,11 +32,9 @@ object DummyService {
 
   val graphqlFields = fields[GraphQLContext, Unit](
     Field("dummy", ListType(graphqlType),
-      arguments = Argument("id", OptionInputType(LongType), description = "id of the document") :: Nil,
-      resolve = f => {
-        f.ctx.credentials.foreach(println)
-        f.ctx.services.dummyService.findGraphQL(f.args)
-      }
+      arguments = Argument("id", OptionInputType(LongType), description = "id of the dummy") :: Nil,
+      resolve = f => f.ctx.services.dummyService.findGraphQL(f.args)
+
     )).head
 
   val graphqlMutationsAddDummy = fields[GraphQLContext, Unit](Field("addDummy", OptionType(DummyService.graphqlType),

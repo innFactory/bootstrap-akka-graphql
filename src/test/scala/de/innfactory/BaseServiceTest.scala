@@ -11,6 +11,7 @@ import org.scalatest.{Matchers, WordSpec}
 import sangria.ast.Document
 import sangria.execution.Executor
 import sangria.marshalling.sprayJson._
+import sangria.renderer.SchemaRenderer
 import spray.json._
 
 import scala.concurrent.Await
@@ -18,6 +19,7 @@ import scala.concurrent.duration._
 
 trait BaseServiceTest extends WordSpec with Matchers with ScalatestRouteTest {
 
+  println(SchemaRenderer.renderSchema(apiSchema))
 
   dbProcess.getProcessId
 
