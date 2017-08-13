@@ -5,7 +5,6 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import de.innfactory.http.SecurityDirectives
-import de.innfactory.models.Dummy
 import de.innfactory.services.AuthService
 import sangria.execution.{ErrorWithResolver, Executor, QueryAnalysisError}
 import sangria.marshalling.sprayJson._
@@ -16,7 +15,7 @@ import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 
 class GraphqlRoute(graphQLServices: GraphQLContextServices)(implicit executionContext: ExecutionContext, override protected val authService: AuthService) extends SecurityDirectives {
-
+  // $COVERAGE-OFF$No changes required
   val route: Route =
     (post & path("graphql")) {
       authenticate { credentials =>
@@ -62,5 +61,6 @@ class GraphqlRoute(graphQLServices: GraphQLContextServices)(implicit executionCo
       get {
         getFromResource("graphiql.html")
       }
+  // $COVERAGE-ON$
 }
 

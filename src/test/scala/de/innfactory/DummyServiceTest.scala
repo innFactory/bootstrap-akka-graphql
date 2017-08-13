@@ -1,9 +1,12 @@
 package de.innfactory
 
+import de.innfactory.models.Dummy
 import sangria.macros._
 import spray.json._
 
 class DummyServiceTest extends BaseServiceTest {
+
+
   "API Schema" should {
     "correctly identify dummy 1 as a" in {
       val query =
@@ -30,6 +33,7 @@ class DummyServiceTest extends BaseServiceTest {
     }
 
     "allow to add dummy e with id 5" in {
+      Dummy(Some(5), "e") //should be created
       val query =
         graphql"""
         mutation {
@@ -52,7 +56,6 @@ class DummyServiceTest extends BaseServiceTest {
         .parseJson)
     }
   }
-
 
 }
 

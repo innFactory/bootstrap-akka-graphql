@@ -1,4 +1,4 @@
-Akka Http Bootstrap
+Akka-http graphQL Bootstrap
 =========================
 
 [![travis-ci.org](https://travis-ci.org/innFactory/bootstrap-akka-graphql.svg?branch=master)](https://travis-ci.org/innFactory/bootstrap-akka-graphql)
